@@ -1,15 +1,11 @@
-Implemented a custom PrunableLinear layer where each weight is paired with a learnable gate parameter.
-Gates are passed through a sigmoid function to constrain values between 0 and 1, and multiplied with weights to enable differentiable pruning.
-The model is trained on the CIFAR-10 dataset using a standard feed-forward architecture.
-Introduced a modified loss function:
-Total Loss = Cross-Entropy Loss + λ × Sparsity Loss
-The sparsity loss is computed as the L1 norm of all gate values, encouraging many gates to become zero.
-L1 regularization promotes sparsity by applying constant pressure that pushes gate values toward exact zero.
-Experiments conducted with multiple λ values show:
-Low λ → higher accuracy, lower sparsity
-High λ → higher sparsity, reduced accuracy
-Sparsity is measured as the percentage of gates below a threshold (e.g., 1e-2).
-Final gate distribution shows:
-A large number of values near 0 (pruned weights)
-A smaller cluster near 1 (important weights)
-The model successfully demonstrates dynamic architecture learning, pruning unnecessary connections during training without requiring a separate pruning step.
+This project implements a self-pruning neural network by introducing a custom PrunableLinear layer, 
+where each weight is paired with a learnable gate parameter. These gates are passed through a sigmoid function 
+to constrain their values between 0 and 1 and are multiplied with the weights, enabling differentiable pruning 
+during training. The model is trained on the CIFAR-10 dataset using a standard feed-forward architecture. 
+A modified loss function is used, combining cross-entropy loss with a sparsity term defined as the L1 norm 
+of all gate values, scaled by a hyperparameter λ. This L1 regularization encourages many gates to move toward zero, 
+effectively pruning less important connections. Experiments with different λ values reveal a clear trade-off: 
+smaller λ values maintain higher accuracy with less sparsity, while larger λ values increase sparsity at the cost 
+of reduced performance. Sparsity is measured as the percentage of gate values below a small threshold, and 
+the final distribution of gates shows a strong concentration near zero along with a smaller group of active values, 
+confirming that the network successfully learns to prune itself and retain only the most important connections.
