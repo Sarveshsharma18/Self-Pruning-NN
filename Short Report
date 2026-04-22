@@ -1,1 +1,9 @@
-This project implements a self-pruning neural network by introducing learnable gate parameters for each weight, enabling the model to dynamically remove unnecessary connections during training. Each gate is passed through a sigmoid function and multiplied with its corresponding weight, allowing gradients to flow through both parameters. To encourage sparsity, an L1 regularization term is applied to all gate values, pushing many of them toward zero and effectively pruning those weights. Experiments with different values of the regularization strength (λ) demonstrate a clear trade-off: smaller λ values retain higher accuracy but result in less sparsity, while larger λ values significantly increase sparsity at the cost of performance. The final gate value distribution shows a strong concentration near zero alongside a smaller cluster of active gates, confirming that the network successfully learns to identify and preserve only the most important connections.
+This project implements a self-pruning neural network by introducing learnable gate parameters for each weight,
+enabling the model to dynamically remove unnecessary connections during training. Each gate is passed through 
+a sigmoid function and multiplied with its corresponding weight, allowing gradients to flow through both parameters. 
+To encourage sparsity, an L1 regularization term is applied to all gate values, pushing many of them toward 
+zero and effectively pruning those weights. Experiments with different values of the regularization strength (λ) 
+demonstrate a clear trade-off: smaller λ values retain higher accuracy but result in less sparsity, 
+while larger λ values significantly increase sparsity at the cost of performance. The final gate value distribution 
+shows a strong concentration near zero alongside a smaller cluster of active gates, confirming that the network 
+successfully learns to identify and preserve only the most important connections.
