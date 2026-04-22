@@ -45,3 +45,16 @@ Lambda	Accuracy	Sparsity
 1e-05	  55.78		  0.43
 0.0001	55.98		  1.44
 0.001	  54.25		  1.69
+
+
+The self-pruning neural network successfully learns to remove unnecessary connections during training by using 
+learnable gate parameters in each layer. Built with custom prunable layers and trained on the CIFAR-10 dataset,
+the model incorporates an L1-based sparsity loss alongside standard classification loss to encourage many gate values
+to approach zero. As a result, the network dynamically prunes less important weights while preserving critical ones.
+The results show a clear trade-off between sparsity and accuracy: lower values of the regularization parameter (λ) 
+retain higher accuracy with minimal pruning, whereas higher λ values lead to significantly increased sparsity but 
+reduced performance. Observations from the gate value distribution further confirm effective pruning, with a large 
+concentration of gates near zero and a smaller cluster near one, indicating that the model successfully identifies 
+and retains only the most important connections while discarding the rest.
+
+
